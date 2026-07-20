@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import { motion } from "framer-motion";
 import { useScrambleText } from "@/hooks/useScramble";
 import { Reveal } from "@/components/effects/Reveal";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
@@ -8,7 +9,10 @@ import { CERTIFICATIONS, LINKS } from "@/lib/content";
 
 function CertCard({ file, title, issuer }: { file: string; title: string; issuer: string }) {
   return (
-    <div className="conic-border-cert w-[230px] shrink-0 rounded-[24px] p-0.5 transition-transform duration-[350ms] hover:-translate-y-2 hover:scale-[1.02]">
+    <motion.div
+      whileHover={{ y: -10, scale: 1.02, transition: { type: "spring", stiffness: 350, damping: 20 } }}
+      className="conic-border-cert w-[230px] shrink-0 rounded-[24px] p-0.5"
+    >
       <div className="overflow-hidden rounded-[22px] bg-[#0a0908]">
         <div className="flex h-[170px] items-center justify-center bg-[#ece5d6] p-5">
           <div className="relative h-full w-full">
@@ -27,7 +31,7 @@ function CertCard({ file, title, issuer }: { file: string; title: string; issuer
           <div className="mt-1 font-mono text-[10.5px] tracking-[.08em] text-muted">{issuer.toUpperCase()}</div>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 }
 
@@ -52,22 +56,26 @@ export function Certifications() {
             {heading}
           </Reveal>
           <Reveal index={2} className="flex flex-wrap gap-3">
-            <a
+            <motion.a
               href="/academic_transcript.pdf"
               target="_blank"
               rel="noreferrer"
+              whileHover={{ scale: 1.04, transition: { type: "spring", stiffness: 400, damping: 22 } }}
+              whileTap={{ scale: 0.95, transition: { type: "spring", stiffness: 500, damping: 30 } }}
               className="whitespace-nowrap rounded-full bg-beige px-6 py-3 text-sm font-extrabold text-ink transition-shadow duration-300 hover:shadow-[0_0_30px_rgba(236,224,203,.4)]"
             >
               {pdfLabel}
-            </a>
-            <a
+            </motion.a>
+            <motion.a
               href={LINKS.credly}
               target="_blank"
               rel="noreferrer"
-              className="whitespace-nowrap rounded-full border border-beige/30 px-6 py-3 text-sm font-bold transition-all duration-300 hover:border-beige/70 hover:shadow-[0_0_30px_rgba(216,196,160,.15)]"
+              whileHover={{ scale: 1.04, transition: { type: "spring", stiffness: 400, damping: 22 } }}
+              whileTap={{ scale: 0.95, transition: { type: "spring", stiffness: 500, damping: 30 } }}
+              className="whitespace-nowrap rounded-full border border-beige/30 px-6 py-3 text-sm font-bold transition-colors duration-300 hover:border-beige/70 hover:shadow-[0_0_30px_rgba(216,196,160,.15)]"
             >
               {credlyLabel}
-            </a>
+            </motion.a>
           </Reveal>
         </div>
       </div>

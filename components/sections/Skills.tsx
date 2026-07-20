@@ -3,7 +3,11 @@
 import { useState } from "react";
 import { useScrambleText } from "@/hooks/useScramble";
 import { Reveal } from "@/components/effects/Reveal";
+import { SkillsCircuit } from "@/components/effects/SkillsCircuit";
 import { SKILLS } from "@/lib/content";
+
+const HOVER_SPRING = { type: "spring", stiffness: 380, damping: 22 } as const;
+const TAP_SPRING = { type: "spring", stiffness: 500, damping: 30 } as const;
 
 function hexToRgba(hex: string, alpha: number): string {
   const clean = hex.replace("#", "");
@@ -34,13 +38,14 @@ function SkillCard({
       index={index}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
-      className="flex flex-col items-center justify-center gap-3.5 rounded-[20px] border bg-white/[0.03] px-3 py-7 backdrop-blur-md transition-all duration-[350ms]"
+      whileHover={{ y: -6, scale: 1.03, transition: HOVER_SPRING }}
+      whileTap={{ scale: 0.97, transition: TAP_SPRING }}
+      className="flex flex-col items-center justify-center gap-3.5 rounded-[20px] border bg-white/[0.03] px-3 py-7 backdrop-blur-md transition-colors duration-[350ms]"
       style={{
         borderColor: hovered ? hexToRgba(color, 0.55) : "rgba(255,255,255,.07)",
         boxShadow: hovered
           ? `0 18px 50px rgba(0,0,0,.55), 0 0 34px ${hexToRgba(color, 0.28)}`
           : "none",
-        transform: hovered ? "translateY(-6px)" : "translateY(0)",
       }}
     >
       <div
@@ -83,20 +88,23 @@ export function Skills() {
 
   return (
     <section id="skills" className="relative z-[1] mx-auto max-w-[1200px] px-10 py-[100px]">
-      <Reveal className="mb-4 font-mono text-xs tracking-[.22em] text-beige2">{label}</Reveal>
-      <Reveal
-        index={1}
-        className="font-display m-0 mb-3.5 text-[clamp(32px,3.4vw,46px)] font-bold tracking-[-.02em] text-white"
-      >
-        {heading}
-      </Reveal>
-      <Reveal index={2} className="m-0 mb-14 max-w-[560px] text-base text-text2">
-        {desc}
-      </Reveal>
-      <div className="grid grid-cols-6 gap-4 max-lg:grid-cols-4 max-[640px]:grid-cols-2">
-        {SKILLS.map((skill, i) => (
-          <SkillCard key={skill.slug} index={i} name={skill.name} glyph={skill.glyph} iconUrl={skill.iconUrl} color={skill.color} />
-        ))}
+      <SkillsCircuit />
+      <div className="relative z-10">
+        <Reveal className="mb-4 font-mono text-xs tracking-[.22em] text-beige2">{label}</Reveal>
+        <Reveal
+          index={1}
+          className="font-display m-0 mb-3.5 text-[clamp(32px,3.4vw,46px)] font-bold tracking-[-.02em] text-white"
+        >
+          {heading}
+        </Reveal>
+        <Reveal index={2} className="m-0 mb-14 max-w-[560px] text-base text-text2">
+          {desc}
+        </Reveal>
+        <div className="grid grid-cols-6 gap-4 max-lg:grid-cols-4 max-[640px]:grid-cols-2">
+          {SKILLS.map((skill, i) => (
+            <SkillCard key={skill.slug} index={i} name={skill.name} glyph={skill.glyph} iconUrl={skill.iconUrl} color={skill.color} />
+          ))}
+        </div>
       </div>
     </section>
   );

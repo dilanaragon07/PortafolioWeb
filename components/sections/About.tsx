@@ -14,12 +14,15 @@ if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger, useGSAP);
 }
 
+const HOVER_SPRING = { type: "spring", stiffness: 380, damping: 22 } as const;
+
 function StatCard({ index, valueKey, value }: { index: number; valueKey: string; value: string }) {
   const label = useScrambleText(valueKey);
   return (
     <Reveal
       index={index}
-      className="rounded-[20px] border border-white/[0.08] bg-white/[0.03] p-5 px-4 backdrop-blur-md transition-all duration-300 hover:-translate-y-1 hover:border-beige2/50"
+      whileHover={{ y: -6, transition: HOVER_SPRING }}
+      className="rounded-[20px] border border-white/[0.08] bg-white/[0.03] p-5 px-4 backdrop-blur-md transition-colors duration-300 hover:border-beige2/50"
     >
       <div className="font-display text-gradient-beige text-[32px] font-bold">{value}</div>
       <div className="mt-1.5 text-[12.5px] font-semibold uppercase tracking-[.06em] text-muted">{label}</div>

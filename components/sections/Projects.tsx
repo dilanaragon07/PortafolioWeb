@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Image from "next/image";
+import { AnimatePresence, motion } from "framer-motion";
 import { useScrambleText } from "@/hooks/useScramble";
 import { Reveal } from "@/components/effects/Reveal";
 import { PROJECT_TAGS, LINKS } from "@/lib/content";
@@ -51,15 +52,26 @@ export function Projects() {
           style={{ background: "radial-gradient(circle, rgba(216,196,160,.09), transparent 65%)" }}
         />
         <div className="grid grid-cols-[1.15fr_1fr] items-stretch max-lg:grid-cols-1">
-          <div className="relative m-7 min-h-[460px] overflow-hidden rounded-[18px] border border-white/[0.08] max-lg:mb-0">
-            <Image
-              key={shot}
-              src={active.src}
-              alt={active.alt}
-              fill
-              sizes="(max-width: 1024px) 100vw, 50vw"
-              className="object-cover object-center"
-            />
+          <div className="relative m-7 min-h-[460px] overflow-hidden rounded-[18px] border border-white/[0.08] bg-[#0c0b09] max-lg:mb-0">
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={shot}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.35, ease: "easeOut" }}
+                className="absolute inset-0"
+              >
+                <Image
+                  src={active.src}
+                  alt={active.alt}
+                  fill
+                  quality={92}
+                  sizes="(max-width: 1024px) 100vw, 50vw"
+                  className="object-contain"
+                />
+              </motion.div>
+            </AnimatePresence>
             <div className="pointer-events-none absolute left-4 top-4 flex gap-2">
               <span className="rounded-full border border-white/[0.12] bg-[rgba(5,5,5,.7)] px-3.5 py-1.5 font-mono text-[11px] tracking-[.08em] text-beige backdrop-blur-md">
                 {active.badge}
@@ -67,17 +79,19 @@ export function Projects() {
             </div>
             <div className="absolute right-4 top-4 flex gap-1.5 rounded-full border border-white/[0.12] bg-[rgba(5,5,5,.7)] p-1 backdrop-blur-md">
               {(Object.keys(shots) as Shot[]).map((key) => (
-                <button
+                <motion.button
                   key={key}
                   type="button"
                   onClick={() => setShot(key)}
                   aria-pressed={shot === key}
+                  whileHover={{ scale: 1.06, transition: { type: "spring", stiffness: 400, damping: 22 } }}
+                  whileTap={{ scale: 0.9, transition: { type: "spring", stiffness: 500, damping: 30 } }}
                   className={`rounded-full px-3 py-1 font-mono text-[11px] tracking-[.06em] transition-colors duration-200 ${
                     shot === key ? "bg-beige text-ink" : "text-muted hover:text-beige"
                   }`}
                 >
                   {shots[key].tab}
-                </button>
+                </motion.button>
               ))}
             </div>
           </div>
@@ -98,20 +112,24 @@ export function Projects() {
               ))}
             </div>
             <div className="flex gap-3.5 max-[480px]:flex-col">
-              <a
+              <motion.a
                 href={LINKS.githubRepo}
                 target="_blank"
                 rel="noreferrer"
-                className="inline-flex items-center justify-center gap-2 rounded-full bg-beige px-[26px] py-[13px] text-sm font-extrabold text-ink transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_0_40px_rgba(236,224,203,.4)]"
+                whileHover={{ y: -3, transition: { type: "spring", stiffness: 380, damping: 22 } }}
+                whileTap={{ scale: 0.96, transition: { type: "spring", stiffness: 500, damping: 30 } }}
+                className="inline-flex items-center justify-center gap-2 rounded-full bg-beige px-[26px] py-[13px] text-sm font-extrabold text-ink transition-shadow duration-300 hover:shadow-[0_0_40px_rgba(236,224,203,.4)]"
               >
                 GitHub ↗
-              </a>
-              <a
+              </motion.a>
+              <motion.a
                 href="#contact"
+                whileHover={{ y: -3, transition: { type: "spring", stiffness: 380, damping: 22 } }}
+                whileTap={{ scale: 0.96, transition: { type: "spring", stiffness: 500, damping: 30 } }}
                 className="inline-flex items-center justify-center gap-2 rounded-full border border-white/[0.14] bg-white/[0.04] px-[26px] py-[13px] text-sm font-semibold text-text1 transition-colors duration-300 hover:border-beige/50 hover:text-white"
               >
                 {demoLabel}
-              </a>
+              </motion.a>
             </div>
           </div>
         </div>

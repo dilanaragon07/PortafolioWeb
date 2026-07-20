@@ -1,5 +1,6 @@
 "use client";
 
+import { motion } from "framer-motion";
 import { useScrambleText } from "@/hooks/useScramble";
 import { Reveal } from "@/components/effects/Reveal";
 import { CONTACTS } from "@/lib/content";
@@ -9,16 +10,18 @@ function ContactPill({ href, glyph, labelKey }: { href: string; glyph: string; l
   const isExternal = href.startsWith("http");
   const isDownload = href.endsWith(".pdf");
   return (
-    <a
+    <motion.a
       href={href}
       target={isExternal ? "_blank" : undefined}
       rel={isExternal ? "noreferrer" : undefined}
       download={isDownload}
-      className="inline-flex items-center gap-2.5 whitespace-nowrap rounded-full border border-white/[0.12] bg-white/[0.035] px-7 py-[15px] text-[14.5px] font-bold text-text1 backdrop-blur-md transition-all duration-300 hover:-translate-y-1 hover:border-beige/60 hover:text-white hover:shadow-[0_14px_40px_rgba(0,0,0,.5),0_0_24px_rgba(216,196,160,.1)]"
+      whileHover={{ y: -5, transition: { type: "spring", stiffness: 380, damping: 22 } }}
+      whileTap={{ scale: 0.95, transition: { type: "spring", stiffness: 500, damping: 30 } }}
+      className="inline-flex items-center gap-2.5 whitespace-nowrap rounded-full border border-white/[0.12] bg-white/[0.035] px-7 py-[15px] text-[14.5px] font-bold text-text1 backdrop-blur-md transition-colors duration-300 hover:border-beige/60 hover:text-white hover:shadow-[0_14px_40px_rgba(0,0,0,.5),0_0_24px_rgba(216,196,160,.1)]"
     >
       <span className="font-mono text-beige2">{glyph}</span>
       <span>{label}</span>
-    </a>
+    </motion.a>
   );
 }
 

@@ -1,5 +1,6 @@
 "use client";
 
+import { motion } from "framer-motion";
 import { useLanguage } from "@/context/LanguageContext";
 import { useScrambleText } from "@/hooks/useScramble";
 import { NAV_LINKS } from "@/lib/content";
@@ -44,22 +45,26 @@ export function Nav() {
         </a>
       </div>
 
-      <a
+      <motion.a
         href="#contact"
-        className="rounded-full bg-beige px-5 py-2.5 text-[13px] font-extrabold text-ink shadow-[0_0_24px_rgba(216,196,160,.25)] transition-all duration-300 hover:bg-white hover:shadow-[0_0_40px_rgba(236,224,203,.45)] max-sm:hidden"
+        whileHover={{ scale: 1.05, transition: { type: "spring", stiffness: 400, damping: 22 } }}
+        whileTap={{ scale: 0.94, transition: { type: "spring", stiffness: 500, damping: 30 } }}
+        className="rounded-full bg-beige px-5 py-2.5 text-[13px] font-extrabold text-ink shadow-[0_0_24px_rgba(216,196,160,.25)] transition-colors duration-300 hover:bg-white hover:shadow-[0_0_40px_rgba(236,224,203,.45)] max-sm:hidden"
       >
         {ctaLabel}
-      </a>
+      </motion.a>
 
-      <button
+      <motion.button
         type="button"
         onClick={toggleLang}
         disabled={isAnimating}
+        whileHover={{ scale: 1.05, transition: { type: "spring", stiffness: 400, damping: 22 } }}
+        whileTap={{ scale: 0.9, transition: { type: "spring", stiffness: 500, damping: 30 } }}
         aria-label={lang === "en" ? "Switch to Spanish" : "Cambiar a inglés"}
         className="min-h-[36px] rounded-full border border-white/[0.16] bg-white/5 px-3.5 py-2 font-mono text-xs font-bold tracking-[.08em] text-beige transition-colors duration-300 hover:border-beige/60 disabled:cursor-wait disabled:opacity-70"
       >
         {lang === "en" ? "ES" : "EN"}
-      </button>
+      </motion.button>
     </nav>
   );
 }

@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { motion } from "framer-motion";
 import { useLanguage } from "@/context/LanguageContext";
 import { useScramble, useScrambleText } from "@/hooks/useScramble";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
@@ -115,18 +116,22 @@ export function Hero() {
         </div>
 
         <div className="mt-11 flex justify-center gap-4 max-[480px]:flex-col">
-          <a
+          <motion.a
             href="#work"
-            className="rounded-full bg-beige px-[34px] py-[15px] text-[15px] font-extrabold text-ink shadow-[0_0_36px_rgba(216,196,160,.25)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-white hover:shadow-[0_0_60px_rgba(236,224,203,.45)]"
+            whileHover={{ y: -4, transition: { type: "spring", stiffness: 380, damping: 22 } }}
+            whileTap={{ scale: 0.96, transition: { type: "spring", stiffness: 500, damping: 30 } }}
+            className="rounded-full bg-beige px-[34px] py-[15px] text-[15px] font-extrabold text-ink shadow-[0_0_36px_rgba(216,196,160,.25)] transition-colors duration-300 hover:bg-white hover:shadow-[0_0_60px_rgba(236,224,203,.45)]"
           >
             {cta1}
-          </a>
-          <a
+          </motion.a>
+          <motion.a
             href="#contact"
-            className="rounded-full border border-white/[0.14] bg-white/[0.04] px-[34px] py-[15px] text-[15px] font-semibold text-text1 backdrop-blur-md transition-all duration-300 hover:-translate-y-0.5 hover:border-beige2/60 hover:text-white"
+            whileHover={{ y: -4, transition: { type: "spring", stiffness: 380, damping: 22 } }}
+            whileTap={{ scale: 0.96, transition: { type: "spring", stiffness: 500, damping: 30 } }}
+            className="rounded-full border border-white/[0.14] bg-white/[0.04] px-[34px] py-[15px] text-[15px] font-semibold text-text1 backdrop-blur-md transition-colors duration-300 hover:border-beige2/60 hover:text-white"
           >
             {cta2}
-          </a>
+          </motion.a>
         </div>
       </div>
 
