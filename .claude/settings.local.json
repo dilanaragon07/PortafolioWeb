@@ -1,0 +1,57 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm --version)",
+      "Read(//home/nora/**)",
+      "Read(//home/nora/.nvm/alias/**)",
+      "Bash(curl -fsSL https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.1/install.sh -o /tmp/claude-1000/-home-nora-Descargas-PortafolioWeb/9d1c273c-57ba-424e-9a54-3c107fa27c39/scratchpad/nvm-install.sh)",
+      "Bash(echo \"EXIT=$?\")",
+      "Bash(bash /tmp/claude-1000/-home-nora-Descargas-PortafolioWeb/9d1c273c-57ba-424e-9a54-3c107fa27c39/scratchpad/nvm-install.sh)",
+      "Bash(claude --version)",
+      "Bash(bash -lic 'node --version; which claude')",
+      "Bash(npm -v)",
+      "Bash(rm -rf node_modules package-lock.json)",
+      "Bash(mkdir -p app components/sections components/effects components/ui context hooks lib public)",
+      "Bash(pnpm -v)",
+      "Bash(bun -v)",
+      "Bash(pip3 --version)",
+      "Bash(uv --version)",
+      "Bash(cargo --version)",
+      "WebFetch(domain:github.com)",
+      "WebFetch(domain:www.impeccable.design)",
+      "WebFetch(domain:mcpmarket.com)",
+      "WebSearch",
+      "Bash(claude plugin *)",
+      "Bash(npx --yes skills@latest --help)",
+      "Bash(npm ping *)",
+      "Bash(curl -LsSf https://astral.sh/uv/install.sh)",
+      "Bash(sh)",
+      "Bash(curl -fsSL https://bun.sh/install)",
+      "Bash(bash)",
+      "Bash(npm install *)",
+      "mcp__code-review-graph__list_graph_stats_tool",
+      "mcp__code-review-graph__get_architecture_overview_tool",
+      "Bash(git -C /home/nora/Descargas/PortafolioWeb status)",
+      "Bash(grep -E '^\\\\-.*\\\\.env|\\\\.env$')"
+    ]
+  },
+  "enabledMcpjsonServers": [
+    "code-review-graph"
+  ],
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Edit|Write|MultiEdit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node \"/home/nora/.claude/skills/impeccable/scripts/hook.mjs\"",
+            "timeout": 5,
+            "statusMessage": "Checking UI changes"
+          }
+        ]
+      }
+    ]
+  },
+  "description": "Impeccable design detector: runs after Edit/Write/MultiEdit on UI files and surfaces findings as system reminders."
+}

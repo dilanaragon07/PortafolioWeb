@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta charset="utf-8">
+<title>Dilan Aragón — AI Engineer &amp; Full Stack Developer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&amp;family=Manrope:wght@400;500;600;700;800&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+<script src="image-slot.js"></script>
+<style>
+html{scroll-behavior:smooth}
+body{margin:0;background:#050505;color:#f2efe9;font-family:'Manrope',sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:#d8c4a0;text-decoration:none}
+a:hover{color:#ece0cb}
+::selection{background:rgba(216,196,160,.3)}
+@property --ang{syntax:'<angle>';initial-value:0deg;inherits:false}
+@keyframes borderspin{to{--ang:360deg}}
+@keyframes floaty{0%,100%{transform:translateY(0)}50%{transform:translateY(-14px)}}
+@keyframes orbdrift{0%,100%{transform:translate(0,0) scale(1)}33%{transform:translate(60px,-40px) scale(1.08)}66%{transform:translate(-40px,30px) scale(.94)}}
+@keyframes orbdrift2{0%,100%{transform:translate(0,0) scale(1)}40%{transform:translate(-70px,50px) scale(1.1)}70%{transform:translate(50px,-30px) scale(.92)}}
+@keyframes pulseline{0%,100%{opacity:.35}50%{opacity:1}}
+@keyframes shimmer{0%{background-position:0% 50%}100%{background-position:200% 50%}}
+</style>
+</helmet>
+<div style="position:relative;min-height:100vh;background:#050505">
+  <canvas id="fx-particles" style="position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:0"></canvas>
+  <div id="fx-cursor" style="position:fixed;width:560px;height:560px;border-radius:50%;background:radial-gradient(circle,rgba(216,196,160,.07),rgba(255,255,255,.03) 45%,transparent 70%);pointer-events:none;z-index:0;transform:translate(-280px,-280px);filter:blur(10px)"></div>
+
+  <nav style="position:fixed;top:20px;left:50%;transform:translateX(-50%);z-index:50;display:flex;align-items:center;gap:36px;padding:14px 30px;border-radius:100px;background:rgba(10,10,10,.55);border:1px solid rgba(255,255,255,.08);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);box-shadow:0 20px 60px rgba(0,0,0,.5)">
+    <a href="#top" style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:17px;color:#fff;letter-spacing:.02em">dilan<span style="color:#d8c4a0">.dev</span></a>
+    <div style="display:flex;gap:26px;font-size:13.5px;font-weight:600;white-space:nowrap">
+      <a href="#about" style="color:#a19c92" style-hover="color:#fff" data-i18n="nav.about">About</a>
+      <a href="#skills" style="color:#a19c92" style-hover="color:#fff" data-i18n="nav.skills">Skills</a>
+      <a href="#work" style="color:#a19c92" style-hover="color:#fff" data-i18n="nav.work">Work</a>
+      <a href="#github" style="color:#a19c92" style-hover="color:#fff">GitHub</a>
+      <a href="#contact" style="color:#a19c92" style-hover="color:#fff" data-i18n="nav.contact">Contact</a>
+    </div>
+    <a href="#contact" style="padding:9px 20px;border-radius:100px;background:#ece0cb;color:#12100c;font-size:13px;font-weight:800;box-shadow:0 0 24px rgba(216,196,160,.25)" style-hover="box-shadow:0 0 40px rgba(236,224,203,.45);color:#12100c;background:#fff" data-i18n="nav.cta">Let's talk</a>
+    <button onClick="{{ toggleLang }}" style="padding:8px 14px;border-radius:100px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.16);color:#ece0cb;font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:700;letter-spacing:.08em;cursor:pointer;transition:border-color .3s" style-hover="border-color:rgba(236,224,203,.6)">{{ langLabel }}</button>
+  </nav>
+
+  <header id="top" data-screen-label="Hero" style="position:relative;min-height:100vh;box-sizing:border-box;padding:130px 40px 90px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;overflow:hidden;z-index:1">
+    <div id="orb1" style="position:absolute;top:-180px;left:8%;width:640px;height:640px;border-radius:50%;background:radial-gradient(circle,rgba(216,196,160,.13),transparent 65%);filter:blur(60px);animation:orbdrift 14s ease-in-out infinite"></div>
+    <div id="orb2" style="position:absolute;bottom:-220px;right:4%;width:720px;height:720px;border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,.07),transparent 65%);filter:blur(70px);animation:orbdrift2 18s ease-in-out infinite"></div>
+    <div style="position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.028) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.028) 1px,transparent 1px);background-size:72px 72px;mask-image:radial-gradient(ellipse 70% 60% at 50% 45%,black 30%,transparent 75%);-webkit-mask-image:radial-gradient(ellipse 70% 60% at 50% 45%,black 30%,transparent 75%)"></div>
+    <div id="hero-inner" style="position:relative;max-width:1060px;padding:0 40px">
+      <div style="display:inline-flex;align-items:center;gap:10px;padding:8px 18px;border-radius:100px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);backdrop-filter:blur(12px);font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.14em;color:#a19c92;margin-bottom:34px">
+        <span style="width:7px;height:7px;border-radius:50%;background:#ece0cb;box-shadow:0 0 12px rgba(236,224,203,.8);animation:pulseline 2.4s ease-in-out infinite"></span>
+        <span data-i18n="hero.badge">AVAILABLE FOR PROJECTS — 2026</span>
+      </div>
+      <h1 style="margin:0;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:clamp(56px,7.4vw,104px);line-height:1.02;letter-spacing:-.03em;color:#fff">Dilan Aragón<br><span style="background:linear-gradient(90deg,#ece0cb 0%,#9c9284 50%,#ece0cb 100%);background-size:200% auto;-webkit-background-clip:text;background-clip:text;color:transparent;animation:shimmer 7s linear infinite" data-i18n="hero.tagline">builds intelligent software.</span></h1>
+      <div style="margin-top:30px;font-family:'JetBrains Mono',monospace;font-size:17px;color:#a19c92;height:26px">
+        <span style="color:#d8c4a0">&gt;</span> <span id="roleText" style="color:#d6d2c9;transition:opacity .35s ease,transform .35s ease;display:inline-block">AI Engineer</span><span style="animation:pulseline 1.1s step-end infinite;color:#d8c4a0">▊</span>
+      </div>
+      <div style="display:flex;gap:16px;justify-content:center;margin-top:44px">
+        <a href="#work" style="padding:15px 34px;border-radius:100px;background:#ece0cb;color:#12100c;font-weight:800;font-size:15px;box-shadow:0 0 36px rgba(216,196,160,.25);transition:box-shadow .3s,transform .3s" style-hover="box-shadow:0 0 60px rgba(236,224,203,.45);transform:translateY(-2px);color:#12100c;background:#fff" data-i18n="hero.cta1">Explore my work</a>
+        <a href="#contact" style="padding:15px 34px;border-radius:100px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.14);color:#f2efe9;font-weight:600;font-size:15px;backdrop-filter:blur(12px);transition:border-color .3s,transform .3s" style-hover="border-color:rgba(216,196,160,.6);transform:translateY(-2px);color:#fff" data-i18n="hero.cta2">Get in touch</a>
+      </div>
+    </div>
+    <div id="scroll-hint" style="margin-top:64px;display:flex;flex-direction:column;align-items:center;gap:10px;color:#6b675f;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.2em">SCROLL<span style="width:1px;height:44px;background:linear-gradient(180deg,#d8c4a0,transparent);animation:pulseline 2s ease-in-out infinite"></span></div>
+  </header>
+
+  <section id="about" data-screen-label="About" style="position:relative;z-index:1;max-width:1200px;margin:0 auto;padding:140px 40px 100px">
+    <div data-reveal="" style="font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.22em;color:#d8c4a0;margin-bottom:16px" data-i18n="about.label">01 — ABOUT</div>
+    <div style="display:grid;grid-template-columns:380px 1fr;gap:80px;align-items:start">
+      <div data-reveal="" style="position:relative">
+        <div style="position:absolute;inset:-24px;border-radius:32px;background:radial-gradient(circle at 30% 20%,rgba(216,196,160,.16),transparent 60%),radial-gradient(circle at 80% 90%,rgba(255,255,255,.09),transparent 60%);filter:blur(30px)"></div>
+        <div style="position:relative;padding:2px;border-radius:28px;background:conic-gradient(from var(--ang),rgba(236,224,203,.85),rgba(255,255,255,.08),rgba(216,196,160,.4),rgba(236,224,203,.85));animation:borderspin 7s linear infinite">
+          <div style="border-radius:26px;overflow:hidden;background:#0c0b09;height:440px">
+            <image-slot id="profile-photo" shape="rect" src="uploads/photo-1784518685147.jpeg" fit="cover" placeholder="Profile photo"></image-slot>
+          </div>
+        </div>
+        <div style="position:absolute;bottom:-18px;right:-18px;padding:12px 20px;border-radius:16px;background:rgba(12,11,9,.75);border:1px solid rgba(255,255,255,.1);backdrop-filter:blur(20px);font-family:'JetBrains Mono',monospace;font-size:12px;color:#ece0cb;animation:floaty 5s ease-in-out infinite;box-shadow:0 16px 50px rgba(0,0,0,.5)" data-i18n="about.badge">● building right now</div>
+      </div>
+      <div>
+        <h2 data-reveal="" style="margin:0 0 24px;font-family:'Space Grotesk',sans-serif;font-size:clamp(32px,3.4vw,46px);font-weight:700;letter-spacing:-.02em;color:#fff;line-height:1.15" data-i18n="about.h2">Independent full-stack developer with an AI-native workflow.</h2>
+        <p data-reveal="" style="margin:0 0 18px;font-size:17px;line-height:1.75;color:#a19c92;max-width:620px" data-i18n="about.p1">I'm Dilan Smith Aragón Ortiz — a developer who ships end-to-end products: from data models and APIs to polished cross-platform interfaces. I work AI-first, pairing tools like Claude with a deep stack of React, Flutter, Node and Supabase to move from idea to production fast.</p>
+        <p data-reveal="" style="margin:0 0 44px;font-size:17px;line-height:1.75;color:#a19c92;max-width:620px"><span data-i18n="about.p2a">My focus: business software that feels effortless — like </span><a href="https://github.com/dilanaragon07/BilleteraGestia">BilleteraGestia</a><span data-i18n="about.p2b">, a lightweight ERP for managing accounts payable and receivable.</span></p>
+        <div data-reveal="" style="display:grid;grid-template-columns:repeat(4,1fr);gap:16px">
+          <sc-for list="{{ stats }}" as="s" hint-placeholder-count="4">
+            <div style="padding:24px 20px;border-radius:20px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);backdrop-filter:blur(16px);transition:transform .3s,border-color .3s" style-hover="transform:translateY(-4px);border-color:rgba(216,196,160,.5)">
+              <div style="font-family:'Space Grotesk',sans-serif;font-size:32px;font-weight:700;background:linear-gradient(90deg,#ece0cb,#9c9284);-webkit-background-clip:text;background-clip:text;color:transparent">{{ s.value }}</div>
+              <div style="margin-top:6px;font-size:12.5px;font-weight:600;letter-spacing:.06em;color:#7d786e;text-transform:uppercase" data-i18n="{{ s.k }}">{{ s.label }}</div>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="skills" data-screen-label="Skills" style="position:relative;z-index:1;max-width:1200px;margin:0 auto;padding:100px 40px">
+    <div data-reveal="" style="font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.22em;color:#d8c4a0;margin-bottom:16px">02 — STACK</div>
+    <h2 data-reveal="" style="margin:0 0 14px;font-family:'Space Grotesk',sans-serif;font-size:clamp(32px,3.4vw,46px);font-weight:700;letter-spacing:-.02em;color:#fff" data-i18n="skills.h2">Technologies I work with</h2>
+    <p data-reveal="" style="margin:0 0 56px;font-size:16px;color:#a19c92;max-width:560px" data-i18n="skills.p">A full-spectrum stack — mobile, web, backend, data and AI.</p>
+    <div data-reveal="" style="display:grid;grid-template-columns:repeat(6,1fr);gap:16px">
+      <sc-for list="{{ skills }}" as="t" hint-placeholder-count="18">
+        <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;padding:28px 12px;border-radius:20px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07);backdrop-filter:blur(16px);transition:transform .35s,border-color .35s,box-shadow .35s;cursor:default" style-hover="transform:translateY(-6px);border-color:rgba(236,224,203,.55);box-shadow:0 18px 50px rgba(0,0,0,.55),0 0 30px rgba(216,196,160,.12)">
+          <div style="width:52px;height:52px;border-radius:14px;display:flex;align-items:center;justify-content:center;background:rgba(236,224,203,.07);border:1px solid rgba(236,224,203,.14);font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:17px;color:#ece0cb"><img data-src="{{ t.iconUrl }}" data-glyph="{{ t.glyph }}" alt="" style="width:26px;height:26px;display:block"></div>
+          <div style="font-size:13px;font-weight:700;color:#d6d2c9;letter-spacing:.02em;text-align:center">{{ t.name }}</div>
+        </div>
+      </sc-for>
+    </div>
+  </section>
+
+  <section id="work" data-screen-label="Projects" style="position:relative;z-index:1;max-width:1200px;margin:0 auto;padding:100px 40px">
+    <div data-reveal="" style="font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.22em;color:#d8c4a0;margin-bottom:16px" data-i18n="work.label">03 — SELECTED WORK</div>
+    <h2 data-reveal="" style="margin:0 0 56px;font-family:'Space Grotesk',sans-serif;font-size:clamp(32px,3.4vw,46px);font-weight:700;letter-spacing:-.02em;color:#fff" data-i18n="work.h2">Featured project</h2>
+    <div data-reveal="" style="position:relative;border-radius:28px;background:rgba(255,255,255,.025);border:1px solid rgba(255,255,255,.08);backdrop-filter:blur(20px);overflow:hidden;transition:border-color .4s" style-hover="border-color:rgba(236,224,203,.35)">
+      <div style="position:absolute;top:-120px;right:-80px;width:480px;height:480px;border-radius:50%;background:radial-gradient(circle,rgba(216,196,160,.09),transparent 65%);filter:blur(40px);pointer-events:none"></div>
+      <div style="display:grid;grid-template-columns:1.15fr 1fr;gap:0;align-items:stretch">
+        <div style="position:relative;min-height:460px;margin:28px 0 28px 28px;border-radius:18px;overflow:hidden;border:1px solid rgba(255,255,255,.08);background:#0c0b09">
+          <image-slot id="proj-billetera" shape="rect" placeholder="BilleteraGestia — dashboard screenshot or video still"></image-slot>
+          <div style="position:absolute;top:16px;left:16px;display:flex;gap:8px;pointer-events:none">
+            <span style="padding:6px 14px;border-radius:100px;background:rgba(5,5,5,.7);border:1px solid rgba(255,255,255,.12);backdrop-filter:blur(10px);font-family:'JetBrains Mono',monospace;font-size:11px;color:#ece0cb;letter-spacing:.08em" data-i18n="proj.video">▶ VIDEO PREVIEW</span>
+          </div>
+        </div>
+        <div style="padding:56px 48px;display:flex;flex-direction:column;justify-content:center">
+          <div style="font-family:'JetBrains Mono',monospace;font-size:11.5px;letter-spacing:.18em;color:#7d786e;margin-bottom:14px">ERP · FINTECH · 2025</div>
+          <h3 style="margin:0 0 16px;font-family:'Space Grotesk',sans-serif;font-size:34px;font-weight:700;color:#fff;letter-spacing:-.01em">BilleteraGestia</h3>
+          <p style="margin:0 0 28px;font-size:16px;line-height:1.7;color:#a19c92" data-i18n="proj.desc">A lightweight ERP focused on accounts payable and receivable — giving businesses a clear, real-time picture of what's owed and what's due, without heavyweight enterprise complexity.</p>
+          <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:36px">
+            <sc-for list="{{ projTags }}" as="tag" hint-placeholder-count="4">
+              <span style="padding:6px 14px;border-radius:100px;background:rgba(236,224,203,.06);border:1px solid rgba(236,224,203,.16);font-family:'JetBrains Mono',monospace;font-size:11.5px;color:#d8c4a0">{{ tag }}</span>
+            </sc-for>
+          </div>
+          <div style="display:flex;gap:14px">
+            <a href="https://github.com/dilanaragon07/BilleteraGestia" target="_blank" style="display:inline-flex;align-items:center;gap:8px;padding:13px 26px;border-radius:100px;background:#ece0cb;color:#12100c;font-weight:800;font-size:14px;transition:box-shadow .3s,transform .3s" style-hover="box-shadow:0 0 40px rgba(236,224,203,.4);transform:translateY(-2px);color:#12100c">GitHub ↗</a>
+            <a href="#contact" style="display:inline-flex;align-items:center;gap:8px;padding:13px 26px;border-radius:100px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.14);color:#f2efe9;font-weight:600;font-size:14px;transition:border-color .3s" style-hover="border-color:rgba(236,224,203,.5);color:#fff" data-i18n="proj.demo">Request a demo</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div data-reveal="" style="margin-top:20px;padding:28px 32px;border-radius:22px;border:1px dashed rgba(255,255,255,.12);display:flex;align-items:center;justify-content:space-between;gap:20px">
+      <div>
+        <div style="font-family:'Space Grotesk',sans-serif;font-size:18px;font-weight:600;color:#d6d2c9" data-i18n="more.h">More projects in progress</div>
+        <div style="font-size:14px;color:#7d786e;margin-top:4px" data-i18n="more.p">New AI and automation work will land here soon.</div>
+      </div>
+      <a href="https://github.com/dilanaragon07" target="_blank" style="white-space:nowrap;font-size:14px;font-weight:700" data-i18n="more.cta">Follow on GitHub →</a>
+    </div>
+  </section>
+
+  <section id="certs" data-screen-label="Certifications" style="position:relative;z-index:1;max-width:1200px;margin:0 auto;padding:100px 40px">
+    <div data-reveal="" style="font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.22em;color:#d8c4a0;margin-bottom:16px" data-i18n="certs.label">04 — CERTIFICATIONS</div>
+    <div style="display:flex;align-items:end;justify-content:space-between;gap:24px;margin-bottom:56px">
+      <h2 data-reveal="" style="margin:0;font-family:'Space Grotesk',sans-serif;font-size:clamp(32px,3.4vw,46px);font-weight:700;letter-spacing:-.02em;color:#fff" data-i18n="certs.h2">Verified credentials</h2>
+      <div data-reveal="" style="display:flex;gap:12px;flex-wrap:wrap"><a href="uploads/academic_transcript20260720-8-3zjd6i.pdf" target="_blank" style="white-space:nowrap;padding:12px 24px;border-radius:100px;background:#ece0cb;color:#12100c;font-size:14px;font-weight:800;transition:box-shadow .3s" style-hover="box-shadow:0 0 30px rgba(236,224,203,.4);color:#12100c" data-i18n="certs.pdf">Academic transcript (PDF)</a><a href="https://www.credly.com/users/dilan-aragon-ortiz" target="_blank" style="white-space:nowrap;padding:12px 24px;border-radius:100px;border:1px solid rgba(236,224,203,.3);font-size:14px;font-weight:700;transition:border-color .3s,box-shadow .3s" style-hover="border-color:rgba(236,224,203,.7);box-shadow:0 0 30px rgba(216,196,160,.15)" data-i18n="certs.credly">View all on Credly ↗</a></div>
+    </div>
+    <div data-reveal="" style="display:grid;grid-template-columns:repeat(3,1fr);gap:20px">
+      <sc-for list="{{ certSlots }}" as="c" hint-placeholder-count="3">
+        <div style="position:relative;padding:2px;border-radius:24px;background:conic-gradient(from var(--ang),rgba(236,224,203,.5),rgba(255,255,255,.05) 40%,rgba(216,196,160,.3) 70%,rgba(236,224,203,.5));animation:borderspin 9s linear infinite;transition:transform .35s" style-hover="transform:translateY(-8px) scale(1.02)">
+          <div style="border-radius:22px;background:#0a0908;overflow:hidden">
+            <div style="height:220px">
+              <image-slot id="{{ c.id }}" shape="rect" placeholder="{{ c.placeholder }}"></image-slot>
+            </div>
+            <div style="padding:20px 22px">
+              <div style="font-family:'Space Grotesk',sans-serif;font-size:16px;font-weight:600;color:#f2efe9" data-i18n="cert.title">{{ c.title }}</div>
+              <div style="font-family:'JetBrains Mono',monospace;font-size:11.5px;color:#7d786e;margin-top:6px;letter-spacing:.08em" data-i18n="cert.issuer">{{ c.issuer }}</div>
+            </div>
+          </div>
+        </div>
+      </sc-for>
+    </div>
+  </section>
+
+  <section id="github" data-screen-label="GitHub" style="position:relative;z-index:1;max-width:1200px;margin:0 auto;padding:100px 40px">
+    <div data-reveal="" style="font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.22em;color:#d8c4a0;margin-bottom:16px">05 — GITHUB</div>
+    <h2 data-reveal="" style="margin:0 0 56px;font-family:'Space Grotesk',sans-serif;font-size:clamp(32px,3.4vw,46px);font-weight:700;letter-spacing:-.02em;color:#fff" data-i18n="gh.h2">Open-source activity</h2>
+    <div data-reveal="" style="border-radius:28px;background:rgba(255,255,255,.025);border:1px solid rgba(255,255,255,.08);backdrop-filter:blur(20px);padding:40px 44px">
+      <div style="display:flex;align-items:center;justify-content:space-between;gap:20px;margin-bottom:28px">
+        <div style="display:flex;align-items:center;gap:14px">
+          <div style="width:44px;height:44px;border-radius:50%;background:rgba(236,224,203,.08);border:1px solid rgba(236,224,203,.2);display:flex;align-items:center;justify-content:center;font-family:'Space Grotesk',sans-serif;font-weight:700;color:#ece0cb">DA</div>
+          <div>
+            <div style="font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:16px;color:#f2efe9">@dilanaragon07</div>
+            <div style="font-family:'JetBrains Mono',monospace;font-size:11.5px;color:#7d786e;letter-spacing:.06em" data-i18n="gh.sub">CONTRIBUTIONS — LAST 12 MONTHS</div>
+          </div>
+        </div>
+        <a href="https://github.com/dilanaragon07" target="_blank" style="font-size:13.5px;font-weight:700" data-i18n="gh.open">Open profile ↗</a>
+      </div>
+      <canvas id="gh-graph" style="width:100%;height:130px;display:block"></canvas>
+      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:32px">
+        <sc-for list="{{ ghStats }}" as="g" hint-placeholder-count="4">
+          <div style="padding:20px 22px;border-radius:18px;background:rgba(255,255,255,.025);border:1px solid rgba(255,255,255,.07)">
+            <div style="font-family:'Space Grotesk',sans-serif;font-size:26px;font-weight:700;color:#ece0cb">{{ g.value }}</div>
+            <div style="font-size:12px;font-weight:600;letter-spacing:.06em;color:#7d786e;text-transform:uppercase;margin-top:4px" data-i18n="{{ g.k }}">{{ g.label }}</div>
+          </div>
+        </sc-for>
+      </div>
+      <div style="margin-top:24px;display:flex;align-items:center;gap:10px;font-family:'JetBrains Mono',monospace;font-size:11px;color:#6b675f">
+        <span data-i18n="gh.langs">TOP LANGUAGES</span>
+        <div style="flex:1;height:8px;border-radius:100px;overflow:hidden;display:flex">
+          <div style="width:34%;background:#ece0cb"></div>
+          <div style="width:26%;background:#b8ab93"></div>
+          <div style="width:20%;background:#8a8172"></div>
+          <div style="width:12%;background:#5c574d"></div>
+          <div style="width:8%;background:#38352f"></div>
+        </div>
+      </div>
+      <div style="margin-top:10px;display:flex;gap:22px;font-family:'JetBrains Mono',monospace;font-size:11px;color:#7d786e">
+        <span><span style="color:#ece0cb">●</span> TypeScript</span><span><span style="color:#b8ab93">●</span> Dart</span><span><span style="color:#8a8172">●</span> Python</span><span><span style="color:#5c574d">●</span> C#</span><span><span style="color:#38352f">●</span> Other</span>
+      </div>
+    </div>
+  </section>
+
+  <section id="experience" data-screen-label="Experience" style="position:relative;z-index:1;max-width:900px;margin:0 auto;padding:100px 40px">
+    <div data-reveal="" style="font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.22em;color:#d8c4a0;margin-bottom:16px" data-i18n="exp.label">06 — EXPERIENCE</div>
+    <h2 data-reveal="" style="margin:0 0 64px;font-family:'Space Grotesk',sans-serif;font-size:clamp(32px,3.4vw,46px);font-weight:700;letter-spacing:-.02em;color:#fff" data-i18n="exp.h2">The journey so far</h2>
+    <div style="position:relative;padding-left:44px">
+      <div style="position:absolute;left:10px;top:6px;bottom:6px;width:1px;background:linear-gradient(180deg,#ece0cb,rgba(236,224,203,.25),transparent)"></div>
+      <sc-for list="{{ timeline }}" as="e" hint-placeholder-count="3">
+        <div data-reveal="" style="position:relative;padding-bottom:52px">
+          <div style="position:absolute;left:-40px;top:4px;width:13px;height:13px;border-radius:50%;background:#0a0908;border:2px solid #ece0cb;box-shadow:0 0 16px rgba(236,224,203,.5)"></div>
+          <div style="font-family:'JetBrains Mono',monospace;font-size:11.5px;letter-spacing:.14em;color:#7d786e;margin-bottom:8px" data-i18n="{{ e.kp }}">{{ e.period }}</div>
+          <div style="font-family:'Space Grotesk',sans-serif;font-size:22px;font-weight:600;color:#f2efe9" data-i18n="{{ e.kr }}">{{ e.role }}</div>
+          <div style="font-size:14.5px;font-weight:700;color:#d8c4a0;margin:4px 0 10px" data-i18n="{{ e.ko }}">{{ e.org }}</div>
+          <p style="margin:0;font-size:15.5px;line-height:1.7;color:#a19c92;max-width:640px" data-i18n="{{ e.kd }}">{{ e.desc }}</p>
+        </div>
+      </sc-for>
+    </div>
+  </section>
+
+  <section id="contact" data-screen-label="Contact" style="position:relative;z-index:1;max-width:1200px;margin:0 auto;padding:100px 40px 80px">
+    <div data-reveal="" style="position:relative;border-radius:32px;overflow:hidden;background:rgba(255,255,255,.025);border:1px solid rgba(255,255,255,.09);backdrop-filter:blur(20px);padding:80px 60px;text-align:center">
+      <div style="position:absolute;top:-160px;left:50%;transform:translateX(-50%);width:700px;height:400px;border-radius:50%;background:radial-gradient(ellipse,rgba(216,196,160,.14),transparent 65%);filter:blur(40px);pointer-events:none"></div>
+      <div style="position:relative">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.22em;color:#d8c4a0;margin-bottom:18px" data-i18n="contact.label">07 — CONTACT</div>
+        <h2 style="margin:0 0 18px;font-family:'Space Grotesk',sans-serif;font-size:clamp(36px,4.4vw,58px);font-weight:700;letter-spacing:-.025em;color:#fff"><span data-i18n="contact.h1a">Let's build something</span><br><span data-i18n="contact.h1b" style="background:linear-gradient(90deg,#ece0cb,#9c9284);-webkit-background-clip:text;background-clip:text;color:transparent">worth talking about.</span></h2>
+        <p style="margin:0 auto 44px;font-size:16.5px;color:#a19c92;max-width:480px;line-height:1.7" data-i18n="contact.p">Open to freelance projects, product collaborations and full-time opportunities.</p>
+        <div style="display:flex;flex-wrap:wrap;gap:14px;justify-content:center">
+          <sc-for list="{{ contacts }}" as="c" hint-placeholder-count="5">
+            <a href="{{ c.href }}" target="_blank" style="display:inline-flex;align-items:center;gap:10px;padding:15px 28px;border-radius:100px;background:rgba(255,255,255,.035);border:1px solid rgba(255,255,255,.12);color:#f2efe9;font-weight:700;font-size:14.5px;white-space:nowrap;backdrop-filter:blur(12px);transition:border-color .3s,transform .3s,box-shadow .3s" style-hover="border-color:rgba(236,224,203,.6);transform:translateY(-3px);box-shadow:0 14px 40px rgba(0,0,0,.5),0 0 24px rgba(216,196,160,.1);color:#fff"><span style="color:#d8c4a0;font-family:'JetBrains Mono',monospace">{{ c.glyph }}</span><span data-i18n="{{ c.k }}">{{ c.label }}</span></a>
+          </sc-for>
+        </div>
+      </div>
+    </div>
+    <div style="margin-top:60px;display:flex;align-items:center;justify-content:space-between;gap:20px;font-family:'JetBrains Mono',monospace;font-size:12px;color:#5c574d">
+      <span>© 2026 DILAN SMITH ARAGÓN ORTIZ</span>
+      <span data-i18n="footer.right">DESIGNED &amp; BUILT WITH AI-NATIVE TOOLING</span>
+    </div>
+  </section>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;particles&quot;: {&quot;editor&quot;: &quot;boolean&quot;, &quot;default&quot;: true, &quot;tsType&quot;: &quot;boolean&quot;, &quot;section&quot;: &quot;Atmosphere&quot;}, &quot;motion&quot;: {&quot;editor&quot;: &quot;enum&quot;, &quot;options&quot;: [&quot;cinematic&quot;, &quot;subtle&quot;], &quot;default&quot;: &quot;cinematic&quot;, &quot;tsType&quot;: &quot;string&quot;, &quot;section&quot;: &quot;Atmosphere&quot;}, &quot;yearsExp&quot;: {&quot;editor&quot;: &quot;text&quot;, &quot;default&quot;: &quot;3&quot;, &quot;tsType&quot;: &quot;string&quot;, &quot;section&quot;: &quot;Stats&quot;}, &quot;projectCount&quot;: {&quot;editor&quot;: &quot;text&quot;, &quot;default&quot;: &quot;10&quot;, &quot;tsType&quot;: &quot;string&quot;, &quot;section&quot;: &quot;Stats&quot;}}">
+class Component extends DCLogic {
+  state = { lang: "en" };
+  t(k) { const d = Component.I18N[k]; return d ? d[this.state.lang] : k; }
+  renderVals() {
+    const p = this.props;
+    return {
+      toggleLang: () => this._toggleLang(),
+      langLabel: this.state.lang === "en" ? "ES" : "EN",
+      stats: [
+        { value: (p.yearsExp ?? "3") + "+", label: this.t("stat.years"), k: "stat.years" },
+        { value: (p.projectCount ?? "10") + "+", label: this.t("stat.projects"), k: "stat.projects" },
+        { value: "18+", label: this.t("stat.tech"), k: "stat.tech" },
+        { value: "AI", label: this.t("stat.ai"), k: "stat.ai" }
+      ],
+      skills: [["Python","python"],["Flutter","flutter"],["React","react"],["Next.js","nextdotjs"],["TypeScript","typescript"],["Node.js","nodedotjs"],["Supabase","supabase"],["Firebase","firebase"],["PostgreSQL","postgresql"],["C#","dotnet"],["C++","cplusplus"],["Java","openjdk"],["Tailwind","tailwindcss"],["Claude","anthropic"],["Vercel","vercel"],["Git & GitHub","github"],["Docker","docker"],["Linux","linux"]].map(([name, slug]) => ({ name, glyph: name.slice(0, 2), iconUrl: "https://cdn.simpleicons.org/" + slug + "/ece0cb" })),
+      projTags: ["React", "Supabase", "Node.js", "TypeScript", "PostgreSQL"],
+      certSlots: [1, 2, 3].map(n => ({ id: "cert-" + n, title: this.t("cert.title"), issuer: this.t("cert.issuer"), placeholder: "Drop Credly badge #" + n })),
+      ghStats: [
+        { value: "620+", label: this.t("ghs.contrib"), k: "ghs.contrib" },
+        { value: "24", label: this.t("ghs.repos"), k: "ghs.repos" },
+        { value: "12", label: this.t("ghs.stars"), k: "ghs.stars" },
+        { value: "98%", label: this.t("ghs.streak"), k: "ghs.streak" }
+      ],
+      timeline: [1, 2, 3].map(n => ({ period: this.t("tl" + n + ".period"), role: this.t("tl" + n + ".role"), org: this.t("tl" + n + ".org"), desc: this.t("tl" + n + ".desc"), kp: "tl" + n + ".period", kr: "tl" + n + ".role", ko: "tl" + n + ".org", kd: "tl" + n + ".desc" })),
+      contacts: [
+        { label: "LinkedIn", glyph: "in", k: "", href: "https://www.linkedin.com/in/dilan7/" },
+        { label: "GitHub", glyph: "gh", k: "", href: "https://github.com/dilanaragon07" },
+        { label: this.t("ct.email"), glyph: "@", k: "ct.email", href: "mailto:dilanaragon07@gmail.com" },
+        { label: this.t("ct.resume"), glyph: "↓", k: "ct.resume", href: "#" },
+        { label: this.t("ct.call"), glyph: "◷", k: "ct.call", href: "#" }
+      ]
+    };
+  }
+  componentDidMount() {
+    const doc = document;
+    // Cycling role text
+    const roles = () => Component.ROLES[this.state.lang];
+    let ri = 0; this._ri = 0;
+    const roleEl = () => doc.getElementById("roleText");
+    this._roleTimer = setInterval(() => {
+      const el = roleEl(); if (!el || this._animLang) return;
+      el.style.opacity = "0"; el.style.transform = "translateY(8px)";
+      setTimeout(() => {
+        const el2 = roleEl(); if (!el2) return;
+        ri = (ri + 1) % roles().length; this._ri = ri;
+        el2.textContent = roles()[ri];
+        el2.style.opacity = "1"; el2.style.transform = "translateY(0)";
+      }, 360);
+    }, 2600);
+    // Cursor glow + hero parallax
+    const strength = (this.props.motion ?? "cinematic") === "subtle" ? 0.4 : 1;
+    this._onMove = (e) => {
+      const cur = doc.getElementById("fx-cursor");
+      if (cur) cur.style.transform = `translate(${e.clientX - 280}px, ${e.clientY - 280}px)`;
+      const inner = doc.getElementById("hero-inner");
+      const o1 = doc.getElementById("orb1"), o2 = doc.getElementById("orb2");
+      const dx = (e.clientX / window.innerWidth - 0.5), dy = (e.clientY / window.innerHeight - 0.5);
+      if (inner) inner.style.transform = `translate(${dx * -18 * strength}px, ${dy * -12 * strength}px)`;
+      if (o1) o1.style.marginLeft = `${dx * 30 * strength}px`;
+      if (o2) o2.style.marginRight = `${dx * -30 * strength}px`;
+    };
+    window.addEventListener("mousemove", this._onMove);
+    // Scroll reveal
+    this._io = new IntersectionObserver((entries) => {
+      entries.forEach((en) => {
+        if (en.isIntersecting) {
+          en.target.style.opacity = "1";
+          en.target.style.transform = "translateY(0)";
+          this._io.unobserve(en.target);
+        }
+      });
+    }, { threshold: 0.12 });
+    doc.querySelectorAll("[data-reveal]").forEach((el, i) => {
+      el.style.opacity = "0";
+      el.style.transform = "translateY(28px)";
+      el.style.transition = `opacity .8s cubic-bezier(.2,.7,.2,1) ${(i % 4) * 0.08}s, transform .8s cubic-bezier(.2,.7,.2,1) ${(i % 4) * 0.08}s`;
+      this._io.observe(el);
+    });
+    // Particles
+    if (this.props.particles ?? true) this._startParticles();
+    const hint = doc.getElementById("scroll-hint");
+    const fitHint = () => { if (hint) hint.style.display = window.innerHeight < 700 ? "none" : "flex"; };
+    fitHint(); window.addEventListener("resize", fitHint);
+    doc.querySelectorAll("img[data-glyph]").forEach((img) => {
+      img.onerror = () => { const g = img.dataset.glyph, par = img.parentElement; img.remove(); if (par) par.textContent = g; };
+      const u = img.dataset.src;
+      if (u && u.indexOf("http") === 0) img.src = u; else img.onerror();
+    });
+    // Contribution graph
+    this._drawGraph();
+    this._onResize = () => this._drawGraph();
+    window.addEventListener("resize", this._onResize);
+  }
+  _startParticles() {
+    const c = document.getElementById("fx-particles"); if (!c) return;
+    const ctx = c.getContext("2d");
+    const fit = () => { c.width = window.innerWidth; c.height = window.innerHeight; };
+    fit(); window.addEventListener("resize", fit);
+    const n = 60, pts = [];
+    for (let i = 0; i < n; i++) pts.push({ x: Math.random() * c.width, y: Math.random() * c.height, r: Math.random() * 1.6 + 0.4, vx: (Math.random() - .5) * 0.18, vy: (Math.random() - .5) * 0.18, a: Math.random() * 0.5 + 0.12 });
+    const tick = () => {
+      ctx.clearRect(0, 0, c.width, c.height);
+      for (const pt of pts) {
+        pt.x += pt.vx; pt.y += pt.vy;
+        if (pt.x < 0) pt.x = c.width; if (pt.x > c.width) pt.x = 0;
+        if (pt.y < 0) pt.y = c.height; if (pt.y > c.height) pt.y = 0;
+        ctx.beginPath(); ctx.arc(pt.x, pt.y, pt.r, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(236,224,203,${pt.a * 0.5})`; ctx.fill();
+      }
+      this._raf = requestAnimationFrame(tick);
+    };
+    tick();
+  }
+  _drawGraph() {
+    const c = document.getElementById("gh-graph"); if (!c) return;
+    const w = c.clientWidth, h = 130;
+    c.width = w * 2; c.height = h * 2;
+    const ctx = c.getContext("2d"); ctx.scale(2, 2);
+    const cols = 52, rows = 7, gap = 3;
+    const cell = Math.min((w - (cols - 1) * gap) / cols, (h - (rows - 1) * gap) / rows);
+    const shades = ["rgba(255,255,255,.05)", "rgba(236,224,203,.18)", "rgba(236,224,203,.38)", "rgba(236,224,203,.62)", "rgba(236,224,203,.92)"];
+    let seed = 7;
+    const rnd = () => { seed = (seed * 16807) % 2147483647; return seed / 2147483647; };
+    for (let x = 0; x < cols; x++) {
+      const wave = 0.35 + 0.45 * Math.sin(x / 6) * Math.sin(x / 13 + 2);
+      for (let y = 0; y < rows; y++) {
+        const v = rnd() * 0.7 + Math.max(0, wave) * rnd();
+        const lvl = v < 0.18 ? 0 : v < 0.38 ? 1 : v < 0.58 ? 2 : v < 0.78 ? 3 : 4;
+        ctx.fillStyle = shades[lvl];
+        const px = x * (cell + gap), py = y * (cell + gap);
+        ctx.beginPath();
+        ctx.roundRect(px, py, cell, cell, 2.5);
+        ctx.fill();
+      }
+    }
+  }
+  _toggleLang() {
+    if (this._animLang) return;
+    const to = this.state.lang === "en" ? "es" : "en";
+    this._animLang = true;
+    document.querySelectorAll("[data-i18n]").forEach((el) => {
+      const d = Component.I18N[el.dataset.i18n];
+      if (d) this._scrambleEl(el, d[to]);
+    });
+    const role = document.getElementById("roleText");
+    if (role) this._scrambleEl(role, Component.ROLES[to][this._ri || 0]);
+    setTimeout(() => { this._animLang = false; document.documentElement.lang = to; this.setState({ lang: to }); }, 1050);
+  }
+  _scrambleEl(el, target) {
+    const dur = 900, start = performance.now();
+    const step = (now) => {
+      const p = Math.min(1, (now - start) / dur);
+      const shown = Math.floor(p * p * target.length);
+      let bits = "";
+      for (let i = 0; i < target.length - shown; i++) bits += Math.random() < 0.5 ? "0" : "1";
+      el.textContent = target.slice(0, shown) + bits;
+      if (p < 1) requestAnimationFrame(step); else el.textContent = target;
+    };
+    requestAnimationFrame(step);
+  }
+  componentWillUnmount() {
+    clearInterval(this._roleTimer);
+    cancelAnimationFrame(this._raf);
+    window.removeEventListener("mousemove", this._onMove);
+    window.removeEventListener("resize", this._onResize);
+    if (this._io) this._io.disconnect();
+  }
+}
+Component.ROLES = {
+  en: ["AI Engineer", "Full Stack Developer", "Flutter Developer", "Automation Engineer", "Cloud Engineer"],
+  es: ["Ingeniero de IA", "Desarrollador Full Stack", "Desarrollador Flutter", "Ingeniero de Automatización", "Ingeniero Cloud"]
+};
+Component.I18N = {
+  "nav.about": { en: "About", es: "Sobre mí" },
+  "nav.skills": { en: "Skills", es: "Habilidades" },
+  "nav.work": { en: "Work", es: "Proyectos" },
+  "nav.contact": { en: "Contact", es: "Contacto" },
+  "nav.cta": { en: "Let's talk", es: "Hablemos" },
+  "hero.badge": { en: "AVAILABLE FOR PROJECTS — 2026", es: "DISPONIBLE PARA PROYECTOS — 2026" },
+  "hero.tagline": { en: "builds intelligent software.", es: "construye software inteligente." },
+  "hero.cta1": { en: "Explore my work", es: "Explora mi trabajo" },
+  "hero.cta2": { en: "Get in touch", es: "Contáctame" },
+  "about.label": { en: "01 — ABOUT", es: "01 — SOBRE MÍ" },
+  "about.h2": { en: "Independent full-stack developer with an AI-native workflow.", es: "Desarrollador full-stack independiente con un flujo de trabajo nativo en IA." },
+  "about.p1": { en: "I'm Dilan Smith Aragón Ortiz — a developer who ships end-to-end products: from data models and APIs to polished cross-platform interfaces. I work AI-first, pairing tools like Claude with a deep stack of React, Flutter, Node and Supabase to move from idea to production fast.", es: "Soy Dilan Smith Aragón Ortiz — un desarrollador que entrega productos de principio a fin: desde modelos de datos y APIs hasta interfaces multiplataforma pulidas. Trabajo AI-first, combinando herramientas como Claude con un stack profundo de React, Flutter, Node y Supabase para pasar de la idea a producción rápido." },
+  "about.p2a": { en: "My focus: business software that feels effortless — like ", es: "Mi enfoque: software empresarial que se siente sin esfuerzo — como " },
+  "about.p2b": { en: ", a lightweight ERP for managing accounts payable and receivable.", es: ", un ERP ligero para gestionar cuentas por pagar y por cobrar." },
+  "about.badge": { en: "● building right now", es: "● construyendo ahora" },
+  "stat.years": { en: "Years coding", es: "Años programando" },
+  "stat.projects": { en: "Projects built", es: "Proyectos creados" },
+  "stat.tech": { en: "Technologies", es: "Tecnologías" },
+  "stat.ai": { en: "Native workflow", es: "Flujo nativo" },
+  "skills.h2": { en: "Technologies I work with", es: "Tecnologías con las que trabajo" },
+  "skills.p": { en: "A full-spectrum stack — mobile, web, backend, data and AI.", es: "Un stack de espectro completo — móvil, web, backend, datos e IA." },
+  "work.label": { en: "03 — SELECTED WORK", es: "03 — TRABAJO SELECCIONADO" },
+  "work.h2": { en: "Featured project", es: "Proyecto destacado" },
+  "proj.video": { en: "▶ VIDEO PREVIEW", es: "▶ VISTA PREVIA" },
+  "proj.desc": { en: "A lightweight ERP focused on accounts payable and receivable — giving businesses a clear, real-time picture of what's owed and what's due, without heavyweight enterprise complexity.", es: "Un ERP ligero enfocado en cuentas por pagar y por cobrar — que da a las empresas una visión clara y en tiempo real de lo que se debe y lo que vence, sin la complejidad del software empresarial pesado." },
+  "proj.demo": { en: "Request a demo", es: "Solicitar demo" },
+  "more.h": { en: "More projects in progress", es: "Más proyectos en camino" },
+  "more.p": { en: "New AI and automation work will land here soon.", es: "Nuevo trabajo de IA y automatización llegará pronto." },
+  "more.cta": { en: "Follow on GitHub →", es: "Sígueme en GitHub →" },
+  "certs.label": { en: "04 — CERTIFICATIONS", es: "04 — CERTIFICACIONES" },
+  "certs.h2": { en: "Verified credentials", es: "Credenciales verificadas" },
+  "certs.credly": { en: "View all on Credly ↗", es: "Ver todo en Credly ↗" },
+  "certs.pdf": { en: "Academic transcript (PDF)", es: "Certificado académico (PDF)" },
+  "cert.title": { en: "Certification badge", es: "Insignia de certificación" },
+  "cert.issuer": { en: "DROP BADGE IMAGE — SEE CREDLY", es: "ARRASTRA LA INSIGNIA — VER CREDLY" },
+  "gh.h2": { en: "Open-source activity", es: "Actividad open-source" },
+  "gh.sub": { en: "CONTRIBUTIONS — LAST 12 MONTHS", es: "CONTRIBUCIONES — ÚLTIMOS 12 MESES" },
+  "gh.open": { en: "Open profile ↗", es: "Ver perfil ↗" },
+  "ghs.contrib": { en: "Contributions", es: "Contribuciones" },
+  "ghs.repos": { en: "Repositories", es: "Repositorios" },
+  "ghs.stars": { en: "Stars earned", es: "Estrellas" },
+  "ghs.streak": { en: "Commit streak", es: "Racha de commits" },
+  "gh.langs": { en: "TOP LANGUAGES", es: "LENGUAJES PRINCIPALES" },
+  "exp.label": { en: "06 — EXPERIENCE", es: "06 — EXPERIENCIA" },
+  "exp.h2": { en: "The journey so far", es: "El camino hasta ahora" },
+  "tl1.period": { en: "2024 — PRESENT", es: "2024 — PRESENTE" },
+  "tl1.role": { en: "Independent Full-Stack Developer", es: "Desarrollador Full-Stack Independiente" },
+  "tl1.org": { en: "Freelance", es: "Freelance" },
+  "tl1.desc": { en: "Designing and shipping complete products for clients and my own ventures — web apps in React/Next.js, mobile apps in Flutter, backends on Node, Supabase and Firebase.", es: "Diseño y entrego productos completos para clientes y proyectos propios — apps web en React/Next.js, apps móviles en Flutter y backends en Node, Supabase y Firebase." },
+  "tl2.period": { en: "2025", es: "2025" },
+  "tl2.role": { en: "Creator — BilleteraGestia", es: "Creador — BilleteraGestia" },
+  "tl2.org": { en: "Personal product", es: "Producto personal" },
+  "tl2.desc": { en: "Built a lightweight ERP for accounts payable and receivable from zero to working product: data model, API, and a clean finance-focused interface.", es: "Construí un ERP ligero de cuentas por pagar y por cobrar desde cero hasta producto funcional: modelo de datos, API y una interfaz financiera limpia." },
+  "tl3.period": { en: "ONGOING", es: "EN CURSO" },
+  "tl3.role": { en: "AI Engineering & Certifications", es: "Ingeniería de IA y Certificaciones" },
+  "tl3.org": { en: "Continuous learning", es: "Aprendizaje continuo" },
+  "tl3.desc": { en: "Deepening AI-assisted development with Claude and modern tooling; verified credentials published on Credly.", es: "Profundizando en el desarrollo asistido por IA con Claude y herramientas modernas; credenciales verificadas publicadas en Credly." },
+  "contact.label": { en: "07 — CONTACT", es: "07 — CONTACTO" },
+  "contact.h1a": { en: "Let's build something", es: "Construyamos algo" },
+  "contact.h1b": { en: "worth talking about.", es: "que valga la pena." },
+  "contact.p": { en: "Open to freelance projects, product collaborations and full-time opportunities.", es: "Abierto a proyectos freelance, colaboraciones de producto y oportunidades de tiempo completo." },
+  "ct.email": { en: "Email", es: "Correo" },
+  "ct.resume": { en: "Download resume", es: "Descargar CV" },
+  "ct.call": { en: "Book a call", es: "Agenda una llamada" },
+  "footer.right": { en: "DESIGNED & BUILT WITH AI-NATIVE TOOLING", es: "DISEÑADO Y CONSTRUIDO CON HERRAMIENTAS DE IA" }
+};
+</script>
+</body>
+</html>

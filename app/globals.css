@@ -1,0 +1,112 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@property --ang {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
+
+:root {
+  color-scheme: dark;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* Progressive-enhancement safety net: scroll-reveal content must never be
+   the only path to visibility (no-JS users, some crawlers/renderers). The
+   inline script in <head> strips .no-js the instant JS runs; if it never
+   runs, this forces every [data-reveal] element fully visible. */
+.no-js [data-reveal] {
+  opacity: 1 !important;
+  transform: none !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+body {
+  background: #050505;
+  color: #f2efe9;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+a {
+  color: #d8c4a0;
+  text-decoration: none;
+}
+
+::selection {
+  background: rgba(216, 196, 160, 0.3);
+}
+
+:focus-visible {
+  outline: 2px solid #ece0cb;
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+.glass {
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.text-gradient-beige {
+  background: linear-gradient(90deg, #ece0cb, #9c9284);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.conic-border {
+  background: conic-gradient(
+    from var(--ang),
+    rgba(236, 224, 203, 0.85),
+    rgba(255, 255, 255, 0.08),
+    rgba(216, 196, 160, 0.4),
+    rgba(236, 224, 203, 0.85)
+  );
+  animation: borderspin 7s linear infinite;
+}
+
+.conic-border-cert {
+  background: conic-gradient(
+    from var(--ang),
+    rgba(236, 224, 203, 0.5),
+    rgba(255, 255, 255, 0.05) 40%,
+    rgba(216, 196, 160, 0.3) 70%,
+    rgba(236, 224, 203, 0.5)
+  );
+  animation: borderspin 9s linear infinite;
+}
+
+@keyframes borderspin {
+  to {
+    --ang: 360deg;
+  }
+}
+
+.bg-grid-mask {
+  background-image: linear-gradient(rgba(255, 255, 255, 0.028) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.028) 1px, transparent 1px);
+  background-size: 72px 72px;
+  -webkit-mask-image: radial-gradient(ellipse 70% 60% at 50% 45%, black 30%, transparent 75%);
+  mask-image: radial-gradient(ellipse 70% 60% at 50% 45%, black 30%, transparent 75%);
+}

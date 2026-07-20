@@ -1,0 +1,17 @@
+{
+  "detector": {
+    "ignoreRules": [],
+    "ignoreFiles": [],
+    "ignoreValues": [
+      {
+        "rule": "gradient-text",
+        "value": "*",
+        "files": [
+          "app/globals.css"
+        ],
+        "createdAt": "2026-07-20T12:06:54.864Z",
+        "reason": "Beige text gradient (#ece0cb→#9c9284) is an explicit, confirmed hi-fi design token from design_handoff_portfolio/README.md, not an AI default"
+      }
+    ]
+  }
+}
