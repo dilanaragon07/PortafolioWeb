@@ -58,7 +58,7 @@ export function Projects() {
               alt={active.alt}
               fill
               sizes="(max-width: 1024px) 100vw, 50vw"
-              className="object-cover object-left-top"
+              className="object-cover object-center"
             />
             <div className="pointer-events-none absolute left-4 top-4 flex gap-2">
               <span className="rounded-full border border-white/[0.12] bg-[rgba(5,5,5,.7)] px-3.5 py-1.5 font-mono text-[11px] tracking-[.08em] text-beige backdrop-blur-md">

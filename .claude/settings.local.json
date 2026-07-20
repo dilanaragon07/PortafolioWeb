@@ -44,7 +44,9 @@
       "Bash(nohup npm run dev)",
       "Bash(disown)",
       "Bash(curl -s -o /dev/null -w \"root: %{http_code}\\\\n\" http://localhost:3000)",
-      "Bash(curl -s -o /dev/null -w \"login.png: %{http_code}\\\\n\" http://localhost:3000/projects/billeteragestia-login.png)"
+      "Bash(curl -s -o /dev/null -w \"login.png: %{http_code}\\\\n\" http://localhost:3000/projects/billeteragestia-login.png)",
+      "Bash(python3 -c ' *)",
+      "Bash(identify billeteragestia-dashboard.png billeteragestia-login.png)"
     ]
   },
   "enabledMcpjsonServers": [
