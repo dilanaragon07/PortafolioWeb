@@ -7,11 +7,13 @@ import { CONTACTS } from "@/lib/content";
 function ContactPill({ href, glyph, labelKey }: { href: string; glyph: string; labelKey: string }) {
   const label = useScrambleText(labelKey);
   const isExternal = href.startsWith("http");
+  const isDownload = href.endsWith(".pdf");
   return (
     <a
       href={href}
       target={isExternal ? "_blank" : undefined}
       rel={isExternal ? "noreferrer" : undefined}
+      download={isDownload}
       className="inline-flex items-center gap-2.5 whitespace-nowrap rounded-full border border-white/[0.12] bg-white/[0.035] px-7 py-[15px] text-[14.5px] font-bold text-text1 backdrop-blur-md transition-all duration-300 hover:-translate-y-1 hover:border-beige/60 hover:text-white hover:shadow-[0_14px_40px_rgba(0,0,0,.5),0_0_24px_rgba(216,196,160,.1)]"
     >
       <span className="font-mono text-beige2">{glyph}</span>

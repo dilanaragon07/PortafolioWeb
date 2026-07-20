@@ -1,19 +1,35 @@
 "use client";
 
+import { useState } from "react";
+import Image from "next/image";
 import { useScrambleText } from "@/hooks/useScramble";
 import { Reveal } from "@/components/effects/Reveal";
-import { MediaPlaceholder } from "@/components/ui/MediaPlaceholder";
 import { PROJECT_TAGS, LINKS } from "@/lib/content";
 
+type Shot = "dashboard" | "login";
+
 export function Projects() {
+  const [shot, setShot] = useState<Shot>("dashboard");
+
   const label = useScrambleText("work.label");
   const heading = useScrambleText("work.h2");
-  const videoBadge = useScrambleText("proj.video");
+  const dashboardBadge = useScrambleText("proj.badge.dashboard");
+  const loginBadge = useScrambleText("proj.badge.login");
+  const dashboardTab = useScrambleText("proj.tab.dashboard");
+  const loginTab = useScrambleText("proj.tab.login");
+  const dashboardAlt = useScrambleText("proj.imgAlt");
+  const loginAlt = useScrambleText("proj.imgAltLogin");
   const desc = useScrambleText("proj.desc");
   const demoLabel = useScrambleText("proj.demo");
   const moreH = useScrambleText("more.h");
   const moreP = useScrambleText("more.p");
   const moreCta = useScrambleText("more.cta");
+
+  const shots: Record<Shot, { src: string; alt: string; badge: string; tab: string }> = {
+    dashboard: { src: "/projects/billeteragestia-dashboard.png", alt: dashboardAlt, badge: dashboardBadge, tab: dashboardTab },
+    login: { src: "/projects/billeteragestia-login.png", alt: loginAlt, badge: loginBadge, tab: loginTab },
+  };
+  const active = shots[shot];
 
   return (
     <section id="work" className="relative z-[1] mx-auto max-w-[1200px] px-10 py-[100px]">
@@ -36,11 +52,33 @@ export function Projects() {
         />
         <div className="grid grid-cols-[1.15fr_1fr] items-stretch max-lg:grid-cols-1">
           <div className="relative m-7 min-h-[460px] overflow-hidden rounded-[18px] border border-white/[0.08] max-lg:mb-0">
-            <MediaPlaceholder label="BilleteraGestia — dashboard screenshot or video still" />
+            <Image
+              key={shot}
+              src={active.src}
+              alt={active.alt}
+              fill
+              sizes="(max-width: 1024px) 100vw, 50vw"
+              className="object-cover object-left-top"
+            />
             <div className="pointer-events-none absolute left-4 top-4 flex gap-2">
               <span className="rounded-full border border-white/[0.12] bg-[rgba(5,5,5,.7)] px-3.5 py-1.5 font-mono text-[11px] tracking-[.08em] text-beige backdrop-blur-md">
-                {videoBadge}
+                {active.badge}
               </span>
+            </div>
+            <div className="absolute right-4 top-4 flex gap-1.5 rounded-full border border-white/[0.12] bg-[rgba(5,5,5,.7)] p-1 backdrop-blur-md">
+              {(Object.keys(shots) as Shot[]).map((key) => (
+                <button
+                  key={key}
+                  type="button"
+                  onClick={() => setShot(key)}
+                  aria-pressed={shot === key}
+                  className={`rounded-full px-3 py-1 font-mono text-[11px] tracking-[.06em] transition-colors duration-200 ${
+                    shot === key ? "bg-beige text-ink" : "text-muted hover:text-beige"
+                  }`}
+                >
+                  {shots[key].tab}
+                </button>
+              ))}
             </div>
           </div>
           <div className="flex flex-col justify-center px-12 py-14 max-lg:px-8 max-lg:py-10">

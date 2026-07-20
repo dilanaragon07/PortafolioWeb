@@ -32,7 +32,19 @@
       "mcp__code-review-graph__list_graph_stats_tool",
       "mcp__code-review-graph__get_architecture_overview_tool",
       "Bash(git -C /home/nora/Descargas/PortafolioWeb status)",
-      "Bash(grep -E '^\\\\-.*\\\\.env|\\\\.env$')"
+      "Bash(grep -E '^\\\\-.*\\\\.env|\\\\.env$')",
+      "Bash(mkdir -p /home/nora/Descargas/PortafolioWeb/public/projects)",
+      "Bash(cp \"/home/nora/Descargas/PortafolioWeb/Multimedia/Hojadevida_Dilan_Real-1.pdf\" \"/home/nora/Descargas/PortafolioWeb/public/resume-dilan-aragon.pdf\")",
+      "Bash(cp \"/home/nora/Imágenes/Dashboard.png\" \"/home/nora/Descargas/PortafolioWeb/public/projects/billeteragestia-dashboard.png\")",
+      "Bash(npx tsc *)",
+      "Bash(curl -s -o /dev/null -w \"resume.pdf: %{http_code}\\\\n\" http://localhost:3000/resume-dilan-aragon.pdf)",
+      "Bash(curl -s -o /dev/null -w \"dashboard.png: %{http_code}\\\\n\" http://localhost:3000/projects/billeteragestia-dashboard.png)",
+      "Bash(curl -s http://localhost:3000)",
+      "Bash(pkill -f \"next dev\")",
+      "Bash(nohup npm run dev)",
+      "Bash(disown)",
+      "Bash(curl -s -o /dev/null -w \"root: %{http_code}\\\\n\" http://localhost:3000)",
+      "Bash(curl -s -o /dev/null -w \"login.png: %{http_code}\\\\n\" http://localhost:3000/projects/billeteragestia-login.png)"
     ]
   },
   "enabledMcpjsonServers": [

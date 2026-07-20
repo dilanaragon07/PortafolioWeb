@@ -55,7 +55,18 @@ export const I18N: Record<string, Record<Lang, string>> = {
   "work.label": { en: "03 — SELECTED WORK", es: "03 — TRABAJO SELECCIONADO" },
   "work.h2": { en: "Featured project", es: "Proyecto destacado" },
   "proj.kicker": { en: "ERP · FINTECH · 2025", es: "ERP · FINTECH · 2025" },
-  "proj.video": { en: "▶ VIDEO PREVIEW", es: "▶ VISTA PREVIA" },
+  "proj.badge.dashboard": { en: "SUPERADMIN DASHBOARD", es: "PANEL SUPERADMIN" },
+  "proj.badge.login": { en: "LOGIN SCREEN", es: "PANTALLA DE LOGIN" },
+  "proj.tab.dashboard": { en: "Dashboard", es: "Dashboard" },
+  "proj.tab.login": { en: "Login", es: "Login" },
+  "proj.imgAlt": {
+    en: "BilleteraGestia superadmin dashboard — control center with active companies, users, MRR and subscriptions.",
+    es: "Panel superadmin de BilleteraGestia — centro de control con empresas activas, usuarios, MRR y suscripciones.",
+  },
+  "proj.imgAltLogin": {
+    en: "BilleteraGestia login screen — email and password sign-in form.",
+    es: "Pantalla de inicio de sesión de BilleteraGestia — formulario de correo y contraseña.",
+  },
   "proj.desc": {
     en: "A lightweight ERP focused on accounts payable and receivable — giving businesses a clear, real-time picture of what's owed and what's due, without heavyweight enterprise complexity.",
     es: "Un ERP ligero enfocado en cuentas por pagar y por cobrar — que da a las empresas una visión clara y en tiempo real de lo que se debe y lo que vence, sin la complejidad del software empresarial pesado.",
@@ -117,7 +128,6 @@ export const I18N: Record<string, Record<Lang, string>> = {
   "ct.github": { en: "GitHub", es: "GitHub" },
   "ct.email": { en: "Email", es: "Correo" },
   "ct.resume": { en: "Download resume", es: "Descargar CV" },
-  "ct.call": { en: "Book a call", es: "Agenda una llamada" },
   "footer.rights": { en: "© 2026 DILAN SMITH ARAGÓN ORTIZ", es: "© 2026 DILAN SMITH ARAGÓN ORTIZ" },
   "footer.right": {
     en: "DESIGNED & BUILT WITH AI-NATIVE TOOLING",
@@ -217,8 +227,7 @@ export const CONTACTS = [
   { labelKey: "ct.linkedin", glyph: "in", href: "https://www.linkedin.com/in/dilan7/" },
   { labelKey: "ct.github", glyph: "gh", href: "https://github.com/dilanaragon07" },
   { labelKey: "ct.email", glyph: "@", href: "mailto:dilanaragon07@gmail.com" },
-  { labelKey: "ct.resume", glyph: "↓", href: "#" },
-  { labelKey: "ct.call", glyph: "◷", href: "#" },
+  { labelKey: "ct.resume", glyph: "↓", href: "/resume-dilan-aragon.pdf" },
 ];
 
 export const LINKS = {
