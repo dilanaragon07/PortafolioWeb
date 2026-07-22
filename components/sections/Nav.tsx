@@ -35,14 +35,6 @@ export function Nav() {
         {NAV_LINKS.map((link) => (
           <NavLink key={link.key} href={link.href} k={link.key} />
         ))}
-        <a
-          href="https://github.com/dilanaragon07"
-          target="_blank"
-          rel="noreferrer"
-          className="whitespace-nowrap text-[13.5px] font-semibold text-text2 transition-colors duration-300 hover:text-white"
-        >
-          GitHub
-        </a>
       </div>
 
       <motion.a

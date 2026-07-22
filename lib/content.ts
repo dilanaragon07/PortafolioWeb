@@ -180,7 +180,7 @@ export const SKILLS = [
 }[];
 
 export const STAT_KEYS = ["stat.years", "stat.projects", "stat.tech", "stat.ai"] as const;
-export const STAT_VALUES = ["3+", "10+", "18+", "AI"] as const;
+export const STAT_VALUES = ["3+", "3", "18+", "AI"] as const;
 
 export const PROJECT_TAGS = ["React", "Supabase", "Node.js", "TypeScript", "PostgreSQL"];
 

@@ -89,7 +89,7 @@ export function About() {
             />
             <div className="conic-border relative rounded-[28px] p-0.5">
               <div className="relative h-[440px] overflow-hidden rounded-[26px] bg-[#0c0b09]">
-                <PhotoFlip src="/photo-dilan.jpeg" alt="Dilan Smith Aragón Ortiz" />
+                <PhotoFlip src="/dilan-formal.png" alt="Dilan Smith Aragón Ortiz" />
               </div>
             </div>
             <div className="absolute -bottom-[18px] -right-[18px] rounded-2xl border border-white/10 bg-[rgba(12,11,9,.75)] px-5 py-3 font-mono text-xs text-beige shadow-[0_16px_50px_rgba(0,0,0,.5)] backdrop-blur-xl motion-safe:animate-floaty">
